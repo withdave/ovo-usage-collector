@@ -1,12 +1,6 @@
 // Add your email, password and customer id (since I haven't implemented an auto lookup for it yet)
 const account = require('./account.json');
 
-// Configure the date range for data retrieval
-const config = {
-    startDate: '2022-12-31', // the date from which you wish to retreve data
-    endDate: '2022-12-31' // the date you wish to retrieve data up to
-}
-
 const fs = require('fs');
 
 // Function to handle our requests
@@ -88,4 +82,4 @@ async function iterDates(startDate,endDate) {
     
 }
 
-iterDates(config.startDate,config.endDate);
+iterDates('2023-01-01','2023-01-31');
