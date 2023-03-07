@@ -1,6 +1,4 @@
-// Per https://forum.ovoenergy.com/my-account-140/can-we-get-access-to-the-ovo-energy-online-account-api-to-download-our-smart-meter-usage-data-58/index9.html#post36122
-
-// Bring in config file with values for the qcs const below, template is in the package
+// Add your email, password and customer id (since I haven't implemented an auto lookup for it yet)
 const account = require('./account.json');
 
 // Configure the date range for data retrieval
@@ -40,11 +38,7 @@ async function getCookie() {
 
 };
 
-// async function getAccountId() {
-
-//     const ovoCookie = await getCookie();
-
-//     console.log(ovoCookie);
+// async function getAccountId(ovoCookie) {
 
 //     var fetchResponse = await fetch('https://smartpaymapi.ovoenergy.com/first-login/api/bootstrap/v2/', {
 //         method: 'GET',
@@ -62,7 +56,6 @@ async function getCookie() {
 
 async function getData(dataDate,ovoCookie) {
 
-    // This should be dynamic
     var fetchResponse = await fetch('https://smartpaymapi.ovoenergy.com/usage/api/half-hourly/' + account.accountId + '?date=' + dataDate, {
         method: 'GET',
         headers: {
@@ -82,7 +75,6 @@ async function getData(dataDate,ovoCookie) {
 async function iterDates(startDate,endDate) {
 
     const ovoCookie = getCookie();
-    var now = new Date();
     var days = [];
     for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
         var currentDate = new Date(d);
